@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Web Developer & Automation Engineer</title>
+  <meta name="description" content="Web developer and automation engineer based in Prague. Building stunning web experiences and intelligent automation systems.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/cursor.css">
+  <link rel="stylesheet" href="css/welcome.css">
+  <link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+  <!-- ============================================
+       CURSOR ELEMENTS
+       ============================================ -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- ============================================
+       WELCOME SCREEN
+       ============================================ -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-bg"></div>
+
+    <div class="welcome-header">
+      <div class="welcome-greeting">Welcome to my portfolio</div>
+      <h1 class="welcome-name">Alex Johnson</h1>
+      <p class="welcome-title">Web Developer & Automation Engineer</p>
+    </div>
+
+    <div class="welcome-carousel-section">
+      <button class="carousel-arrow" id="carouselPrev">◀</button>
+
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Light Theme Card -->
+          <div class="theme-card card-light active" data-theme="light">
+            <div class="card-inner">
+              <div class="card-nav">
+                <div class="card-nav-dot active"></div>
+                <div class="card-nav-dot"></div>
+                <div class="card-nav-dot"></div>
+              </div>
+              <div class="card-preview-title">Portfolio</div>
+              <div class="card-preview-text">Clean, modern design with smooth interactions and responsive layout.</div>
+              <button class="card-preview-btn">Explore</button>
+              <div class="card-theme-label">Light Theme</div>
+            </div>
+          </div>
+
+          <!-- Dark Theme Card -->
+          <div class="theme-card card-dark" data-theme="dark">
+            <div class="card-inner">
+              <div class="card-glass-block">
+                <div class="card-preview-title">Dark Mode</div>
+              </div>
+              <div class="card-preview-text">Elegant glassmorphism design with sophisticated purple gradients and floating effects.</div>
+              <div class="card-theme-label">Dark Theme</div>
+            </div>
+          </div>
+
+          <!-- Terminal Theme Card -->
+          <div class="theme-card card-terminal" data-theme="terminal">
+            <div class="card-inner">
+              <div class="card-terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <div class="terminal-title">terminal.sh</div>
+              </div>
+              <div class="card-terminal-body">
+                <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">portfolio --theme terminal</span></div>
+                <div class="terminal-line"><span class="output">Loading cyberpunk vibes...</span></div>
+                <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">echo "Ready!"</span></div>
+                <div class="terminal-line"><span class="output">Ready!<span class="terminal-cursor"></span></span></div>
+              </div>
+              <div class="card-theme-label">Terminal Theme</div>
+            </div>
+          </div>
+
+          <!-- Retro Theme Card -->
+          <div class="theme-card card-retro" data-theme="retro">
+            <div class="card-inner">
+              <div class="card-retro-titlebar">
+                <span>PORTFOLIO.EXE</span>
+                <div class="retro-buttons">
+                  <div class="retro-btn">_</div>
+                  <div class="retro-btn">□</div>
+                  <div class="retro-btn">×</div>
+                </div>
+              </div>
+              <div class="card-retro-body">
+                <div class="card-preview-title">WIN95</div>
+                <div class="card-preview-text">Nostalgic Windows 95 aesthetic with pixel fonts and CRT effects.</div>
+                <button class="card-preview-btn">OK</button>
+              </div>
+              <div class="card-theme-label">Retro Theme</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-arrow" id="carouselNext">▶</button>
+    </div>
+
+    <div class="carousel-dots">
+      <div class="carousel-dot active" data-slide="0"></div>
+      <div class="carousel-dot" data-slide="1"></div>
+      <div class="carousel-dot" data-slide="2"></div>
+      <div class="carousel-dot" data-slide="3"></div>
+    </div>
+
+    <div class="welcome-hint">
+      <span>↔</span> slide to change theme
+    </div>
+
+    <button class="welcome-enter" id="welcomeEnter">Enter Portfolio</button>
+  </div>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav>
+    <a href="#" class="nav-logo">Alex</a>
+
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="theme-switcher">
+        <button class="theme-dot active" data-theme="light" title="Light Theme"></button>
+        <button class="theme-dot" data-theme="dark" title="Dark Theme"></button>
+        <button class="theme-dot" data-theme="terminal" title="Terminal Theme"></button>
+        <button class="theme-dot" data-theme="retro" title="Retro Theme"></button>
+      </div>
+    </div>
+
+    <button class="nav-burger" id="navBurger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-greeting">Hello, I'm</div>
+      <h1 class="hero-name">Alex Johnson</h1>
+      <p class="hero-subtitle">
+        I build <span class="typewriter-text" id="typewriter"></span>
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ABOUT SECTION
+       ============================================ -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">About Me</h2>
+
+      <div class="about-content reveal reveal-delay-1">
+        <div class="about-image">
+          <span>👨‍💻</span>
+        </div>
+
+        <div class="about-text">
+          <p class="reveal reveal-delay-2">
+            I'm a passionate web developer and automation engineer based in Prague. With a background in computer science from ČVUT FEL SIT, I specialize in building elegant, performant web applications and intelligent automation systems.
+          </p>
+
+          <p class="reveal reveal-delay-2">
+            My expertise spans full-stack development, from crafting responsive interfaces to designing robust backends. I'm particularly interested in AI integration, process automation, and creating solutions that make a real impact.
+          </p>
+
+          <div class="reveal reveal-delay-3">
+            <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Tech Stack</p>
+            <div class="tech-stack">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">AI/ML</span>
+            </div>
+          </div>
+
+          <!-- Skill Bars -->
+          <div class="skills-section reveal reveal-delay-4">
+            <p>Core Skills</p>
+
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span class="skill-name">JavaScript / TypeScript</span>
+                <span class="skill-percent">0%</span>
+              </div>
+              <div class="skill-track">
+                <div class="skill-fill" data-level="90"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span class="skill-name">Python</span>
+                <span class="skill-percent">0%</span>
+              </div>
+              <div class="skill-track">
+                <div class="skill-fill" data-level="85"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span class="skill-name">React / Frontend</span>
+                <span class="skill-percent">0%</span>
+              </div>
+              <div class="skill-track">
+                <div class="skill-fill" data-level="80"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span class="skill-name">AI / ML Integration</span>
+                <span class="skill-percent">0%</span>
+              </div>
+              <div class="skill-track">
+                <div class="skill-fill" data-level="75"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar">
+              <div class="skill-info">
+                <span class="skill-name">PHP / Backend</span>
+                <span class="skill-percent">0%</span>
+              </div>
+              <div class="skill-track">
+                <div class="skill-fill" data-level="70"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="counters reveal reveal-delay-4">
+            <div class="counter">
+              <div class="counter-number" data-target="3" data-suffix="+">0</div>
+              <div class="counter-label">Projects</div>
+            </div>
+            <div class="counter">
+              <div class="counter-number" data-target="2" data-suffix="+">0</div>
+              <div class="counter-label">Years Experience</div>
+            </div>
+            <div class="counter">
+              <div class="counter-number" data-target="5" data-suffix="+">0</div>
+              <div class="counter-label">Clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROJECTS SECTION
+       ============================================ -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">My Projects</h2>
+
+      <div class="projects-grid">
+        <!-- EstateShine Project -->
+        <div class="project-card reveal reveal-delay-1" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">🏠</div>
+          <div class="project-content">
+            <h3 class="project-title">EstateShine</h3>
+            <p class="project-description">
+              A modern real estate platform connecting buyers and sellers with an intuitive interface and advanced search capabilities.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">PostgreSQL</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View</a>
+              <a href="#" class="project-link github">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tripal Project -->
+        <div class="project-card reveal reveal-delay-2" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">✈️</div>
+          <div class="project-content">
+            <h3 class="project-title">Tripal</h3>
+            <p class="project-description">
+              A comprehensive travel planning platform that helps users organize itineraries, find deals, and share travel experiences.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">PHP</span>
+              <span class="project-tag">MySQL</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View</a>
+              <a href="#" class="project-link github">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Automation Project -->
+        <div class="project-card reveal reveal-delay-3" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">🤖</div>
+          <div class="project-content">
+            <h3 class="project-title">AI Automation</h3>
+            <p class="project-description">
+              Intelligent automation systems leveraging AI to streamline workflows, from data processing to intelligent chatbots.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">OpenAI</span>
+              <span class="project-tag">Telegram API</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">View</a>
+              <a href="#" class="project-link github">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES SECTION
+       ============================================ -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Services</h2>
+
+      <div class="services-grid">
+        <!-- Web Development -->
+        <div class="service-box reveal reveal-delay-1">
+          <div class="service-icon">💻</div>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-description">
+            Building responsive, modern websites and applications. From landing pages to full-featured platforms, I create digital experiences that engage and convert.
+          </p>
+        </div>
+
+        <!-- Automation -->
+        <div class="service-box reveal reveal-delay-2">
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">Automation</h3>
+          <p class="service-description">
+            Python scripts, web scrapers, data parsers, and Telegram bots. I automate repetitive tasks and streamline workflows to save time and reduce errors.
+          </p>
+        </div>
+
+        <!-- AI Integration -->
+        <div class="service-box reveal reveal-delay-3">
+          <div class="service-icon">🧠</div>
+          <h3 class="service-title">AI Integration</h3>
+          <p class="service-description">
+            Integrating cutting-edge AI tools into your projects. From chat-bots to intelligent content analysis, I leverage AI to create smarter solutions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT SECTION
+       ============================================ -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Let's Work Together</h2>
+
+      <div class="contact-wrapper">
+        <form class="contact-form reveal reveal-delay-1" id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+
+        <div class="reveal reveal-delay-2">
+          <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">
+            Or reach out directly through social media
+          </p>
+
+          <div class="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+              <span>⭐</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+              <span>💼</span>
+            </a>
+            <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-link" title="Telegram">
+              <span>✈️</span>
+            </a>
+            <a href="mailto:contact@example.com" class="social-link" title="Email">
+              <span>📧</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="js/cursor.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/effects.js"></script>
+</body>
+</html>

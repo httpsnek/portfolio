@@ -1,0 +1,180 @@
+/* ============================================
+   CUSTOM CURSOR — 4 unique styles per theme
+   ============================================ */
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Base cursor elements */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+/* Hide on mobile */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ☀️ LIGHT — Ink Drop cursor */
+[data-theme="light"] .cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #18181b;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  transition: transform 200ms ease, width 200ms ease, height 200ms ease;
+}
+
+[data-theme="light"] .cursor-dot.hover {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+[data-theme="light"] .cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(37, 99, 235, 0.25);
+  opacity: 0.6;
+  transition: width 300ms ease, height 300ms ease, opacity 300ms ease, border-color 300ms ease;
+}
+
+[data-theme="light"] .cursor-ring.hover {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(37, 99, 235, 0.5);
+  opacity: 0.3;
+}
+
+[data-theme="light"] .cursor-ring.click {
+  width: 24px;
+  height: 24px;
+  opacity: 0.9;
+  border-color: var(--accent);
+}
+
+/* 🌙 DARK — Glowing dot + comet trail */
+[data-theme="dark"] .cursor-dot {
+  width: 10px;
+  height: 10px;
+  background: #e9d5ff;
+  box-shadow: 0 0 10px var(--accent-glow),
+              0 0 20px var(--accent-glow),
+              0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+[data-theme="dark"] .cursor-ring {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  background: rgba(124, 58, 237, 0.05);
+  transition: width 300ms ease, height 300ms ease, background 300ms ease;
+}
+
+[data-theme="dark"] .cursor-ring.hover {
+  width: 64px;
+  height: 64px;
+  background: rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* Comet trail dots */
+.cursor-trail {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+[data-theme="dark"] .cursor-trail {
+  display: block;
+}
+
+[data-theme="light"] .cursor-trail,
+[data-theme="terminal"] .cursor-trail,
+[data-theme="retro"] .cursor-trail {
+  display: none;
+}
+
+/* ⬛ TERMINAL — Blinking block cursor */
+[data-theme="terminal"] .cursor-dot {
+  width: 12px;
+  height: 20px;
+  background: var(--cursor-dot);
+  border-radius: 0;
+  animation: terminal-blink 1s step-end infinite;
+}
+
+[data-theme="terminal"] .cursor-ring {
+  display: none;
+}
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Matrix rain particles on move */
+.cursor-matrix-char {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+[data-theme="terminal"] .cursor-matrix-char {
+  display: block;
+}
+
+[data-theme="light"] .cursor-matrix-char,
+[data-theme="dark"] .cursor-matrix-char,
+[data-theme="retro"] .cursor-matrix-char {
+  display: none;
+}
+
+/* 🟠 RETRO — Pixel pointer */
+[data-theme="retro"] .cursor-dot {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border-radius: 0;
+  /* CSS pixel art pointer */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M2 2h2v2H2V2zm2 2h2v2H4V4zm2 2h2v2H6V6zm2 2h2v2H8V8zm2 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2V8zm2 2h2v2h-2v-2zm-4 4h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2z' fill='%23ff3b00'/%3E%3Cpath d='M4 2h2v2H4V2zm2 2h2v2H6V4zm2 2h2v2H8V6zm2 2h2v2h-2V8zm2 2h2v2h-2v-2z' fill='%232c2c2c'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translate(0, 0);
+}
+
+[data-theme="retro"] .cursor-ring {
+  display: none;
+}
+
+[data-theme="retro"] .cursor-dot.click {
+  transform: translate(2px, 2px);
+}

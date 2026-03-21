@@ -1,0 +1,169 @@
+/* ============================================
+   THEME VARIABLES — 4 themes
+   Light | Dark | Terminal | Retro
+   ============================================ */
+
+:root {
+  /* Transition for theme switching */
+  --theme-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ☀️ LIGHT THEME */
+[data-theme="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f0f0;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(250, 250, 250, 0.85);
+
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-tertiary: #a1a1aa;
+  --text-inverse: #ffffff;
+
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: rgba(37, 99, 235, 0.1);
+  --accent-glow: rgba(37, 99, 235, 0.3);
+
+  --border: #e4e4e7;
+  --border-hover: #d4d4d8;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 16px 50px rgba(0, 0, 0, 0.15);
+
+  --cursor-dot: #18181b;
+  --cursor-ring: #2563eb;
+
+  --gradient-hero: linear-gradient(135deg, #fafafa 0%, #e8f0fe 100%);
+  --gradient-accent: linear-gradient(135deg, #2563eb, #7c3aed);
+
+  --font-primary: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --scrollbar-track: #f0f0f0;
+  --scrollbar-thumb: #d4d4d8;
+}
+
+/* 🌙 DARK THEME */
+[data-theme="dark"] {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-tertiary: #1a1a24;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-nav: rgba(10, 10, 15, 0.85);
+
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-inverse: #0a0a0f;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-light: rgba(124, 58, 237, 0.1);
+  --accent-glow: rgba(124, 58, 237, 0.4);
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 30px rgba(124, 58, 237, 0.1);
+  --shadow-card-hover: 0 16px 50px rgba(124, 58, 237, 0.2);
+
+  --cursor-dot: #e9d5ff;
+  --cursor-ring: #7c3aed;
+
+  --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 100%);
+  --gradient-accent: linear-gradient(135deg, #7c3aed, #06b6d4);
+
+  --font-primary: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --scrollbar-track: #111118;
+  --scrollbar-thumb: #333;
+}
+
+/* ⬛ TERMINAL THEME */
+[data-theme="terminal"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
+  --bg-card: rgba(0, 255, 135, 0.03);
+  --bg-nav: rgba(0, 0, 0, 0.9);
+
+  --text-primary: #00ff87;
+  --text-secondary: #00cc6a;
+  --text-tertiary: #009950;
+  --text-inverse: #000000;
+
+  --accent: #00ff87;
+  --accent-hover: #00cc6a;
+  --accent-light: rgba(0, 255, 135, 0.08);
+  --accent-glow: rgba(0, 255, 135, 0.4);
+
+  --border: rgba(0, 255, 135, 0.15);
+  --border-hover: rgba(0, 255, 135, 0.3);
+
+  --shadow-sm: 0 0 4px rgba(0, 255, 135, 0.1);
+  --shadow-md: 0 0 12px rgba(0, 255, 135, 0.15);
+  --shadow-lg: 0 0 40px rgba(0, 255, 135, 0.2);
+  --shadow-card: 0 0 20px rgba(0, 255, 135, 0.08);
+  --shadow-card-hover: 0 0 40px rgba(0, 255, 135, 0.15);
+
+  --cursor-dot: #00ff87;
+  --cursor-ring: #00ff87;
+
+  --gradient-hero: linear-gradient(135deg, #000000 0%, #001a0d 100%);
+  --gradient-accent: linear-gradient(135deg, #00ff87, #00cc6a);
+
+  --font-primary: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --scrollbar-track: #000000;
+  --scrollbar-thumb: #00ff87;
+}
+
+/* 🟠 RETRO THEME */
+[data-theme="retro"] {
+  --bg-primary: #f5e6d0;
+  --bg-secondary: #efe0ca;
+  --bg-tertiary: #e8d6bc;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(245, 230, 208, 0.9);
+
+  --text-primary: #2c2c2c;
+  --text-secondary: #555555;
+  --text-tertiary: #888888;
+  --text-inverse: #ffffff;
+
+  --accent: #ff3b00;
+  --accent-hover: #cc2f00;
+  --accent-light: rgba(255, 59, 0, 0.1);
+  --accent-glow: rgba(255, 59, 0, 0.3);
+
+  --border: #c8b8a0;
+  --border-hover: #a89880;
+
+  --shadow-sm: 2px 2px 0 #c8b8a0;
+  --shadow-md: 3px 3px 0 #c8b8a0;
+  --shadow-lg: 5px 5px 0 #c8b8a0;
+  --shadow-card: 4px 4px 0 #c8b8a0;
+  --shadow-card-hover: 6px 6px 0 #a89880;
+
+  --cursor-dot: #ff3b00;
+  --cursor-ring: #ff3b00;
+
+  --gradient-hero: linear-gradient(135deg, #f5e6d0 0%, #ffeedd 100%);
+  --gradient-accent: linear-gradient(135deg, #ff3b00, #ff6b00);
+
+  --font-primary: 'Press Start 2P', cursive;
+  --font-mono: 'Press Start 2P', cursive;
+
+  --scrollbar-track: #f5e6d0;
+  --scrollbar-thumb: #c8b8a0;
+}
