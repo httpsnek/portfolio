@@ -332,7 +332,6 @@ a:hover {
   a,
   button,
   .btn,
-  .theme-dot,
   .nav-link,
   .project-link,
   .social-link,
@@ -341,6 +340,12 @@ a:hover {
   .nav-burger {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Theme dots — smaller tap target, they sit in a tight row */
+  .theme-dot {
+    min-height: 28px;
+    min-width: 28px;
   }
 
   /* Remove hover transforms on touch (no hover state anyway) */

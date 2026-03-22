@@ -873,19 +873,18 @@ nav {
    Mobile nav — slide-in drawer from right
    ────────────────────────────────────────── */
 
-/* Backdrop — semi-transparent overlay left of drawer */
+/* Backdrop — dimmed overlay behind drawer */
 .nav-backdrop {
   position: fixed;
   inset: 0;
   z-index: 9997;
-  /* Dark tint — backdrop-filter removed because it was rendering opaque */
-  background: rgba(0, 0, 0, 0.48);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   pointer-events: none;
   transition: opacity 280ms ease;
 }
 
-/* Drawer */
+/* Drawer panel */
 .nav-center.open {
   display: flex !important;
   flex-direction: column;
@@ -893,16 +892,40 @@ nav {
   top: 0;
   right: 0;
   bottom: 0;
+  left: auto;
   width: min(300px, 82vw);
   z-index: 9999;
-  background: var(--bg-primary);
-  border-left: 1px solid var(--border);
-  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.3);
+  /* Distinct drawer bg — NOT var(--bg-primary), these are opaque and contrasted */
+  background: #1c1c28;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.4);
   align-items: stretch;
   justify-content: flex-start;
   gap: 0;
   padding: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   animation: drawerSlideIn 320ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Per-theme drawer backgrounds — always distinct from site bg */
+[data-theme="light"] .nav-center.open {
+  background: #ffffff;
+  border-left-color: rgba(0, 0, 0, 0.08);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.12);
+}
+[data-theme="dark"] .nav-center.open {
+  background: #141420;
+  border-left-color: rgba(124, 58, 237, 0.15);
+}
+[data-theme="terminal"] .nav-center.open {
+  background: #0a0a0a;
+  border-left-color: rgba(0, 255, 135, 0.2);
+}
+[data-theme="retro"] .nav-center.open {
+  background: #ede0cc;
+  border-left-color: #2c2c2c;
+  box-shadow: -6px 0 0 #2c2c2c;
 }
 
 @keyframes drawerSlideIn {
@@ -919,12 +942,12 @@ nav {
   to   { transform: translateX(105%); }
 }
 
-/* Top spacer matching nav height — header area */
+/* Drawer header */
 .nav-center.open::before {
   content: 'Menu';
   display: flex;
   align-items: center;
-  height: 64px;
+  min-height: 64px;
   flex-shrink: 0;
   padding: 0 1.75rem;
   font-size: 0.7rem;
@@ -935,14 +958,18 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 
-/* Nav links list */
+/* Nav links */
 .nav-center.open .nav-links {
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 0;
   list-style: none;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   width: 100%;
+}
+
+.nav-center.open .nav-links li {
+  display: block;
 }
 
 .nav-center.open .nav-link {
@@ -951,56 +978,69 @@ nav {
   padding: 0.9rem 1.75rem;
   display: block;
   width: 100%;
-  letter-spacing: 0.01em;
   color: var(--text-secondary);
   border-left: 3px solid transparent;
   transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+  /* Override min-height from touch rules inside drawer */
+  min-height: unset;
+  min-width: unset;
 }
 
 .nav-center.open .nav-link:hover,
 .nav-center.open .nav-link:active {
   color: var(--text-primary);
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.04);
   border-left-color: var(--accent);
 }
 
-/* Remove underline animation inside drawer */
+[data-theme="light"] .nav-center.open .nav-link:active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* No underline animation in drawer */
 .nav-center.open .nav-link::after {
   display: none;
 }
 
-/* Theme switcher block at bottom */
+/* ── Theme switcher at drawer bottom ── */
 .nav-center.open .theme-switcher {
   margin-top: auto;
   order: 10;
   padding: 1.25rem 1.75rem 1.75rem;
   border-top: 1px solid var(--border);
-  gap: 0.65rem;
+  /* Row with wrap: ::before takes full row, dots wrap to next row */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  gap: 0.75rem;
   width: 100%;
-  position: relative;
 }
 
-/* "Theme" label floated above dots */
+/* Label — full width forces it onto its own row */
 .nav-center.open .theme-switcher::before {
   content: 'Theme';
+  display: block;
   width: 100%;
+  flex: 0 0 100%;
   font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--text-tertiary);
-  margin-bottom: 0.1rem;
-  flex-basis: 100%;
+  pointer-events: none;
 }
 
-/* Theme dots row */
+/* Dots — override the 44px min from touch rules, use real visible size */
 .nav-center.open .theme-dot {
-  width: 22px;
-  height: 22px;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  border-width: 2px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Tablet (≤ 768px) ── */
