@@ -80,15 +80,15 @@ nav {
 
 .theme-switcher {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .theme-dot {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: 1.5px solid transparent;
   cursor: none;
   transition: all 300ms ease;
   display: flex;
@@ -97,12 +97,13 @@ nav {
 }
 
 .theme-dot:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 .theme-dot.active {
   border-color: var(--text-primary);
-  box-shadow: 0 0 12px var(--accent-glow);
+  box-shadow: 0 0 8px var(--accent-glow);
+  transform: scale(1.15);
 }
 
 .theme-dot[data-theme="light"] {
@@ -132,27 +133,29 @@ nav {
   cursor: none;
   background: none;
   border: none;
-  padding: 0;
+  padding: 4px;
 }
 
 .nav-burger span {
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: var(--text-primary);
   border-radius: 2px;
-  transition: all 300ms ease;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .nav-burger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .nav-burger.active span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
 .nav-burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* ============================================
@@ -877,7 +880,6 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  /* Slide in from top */
   animation: navSlideIn 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
@@ -889,32 +891,47 @@ nav {
 .nav-center.open .nav-links {
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   list-style: none;
 }
 
 .nav-center.open .nav-link {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  /* Big tap target */
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.5rem;
   display: block;
+  letter-spacing: 0.02em;
+}
+
+/* Underline off in mobile menu, use different hover */
+.nav-center.open .nav-link::after {
+  display: none;
+}
+
+.nav-center.open .nav-link:active {
+  opacity: 0.6;
 }
 
 .nav-center.open .theme-switcher {
   order: 0;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .nav-center.open .theme-dot {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
 }
 
 /* ── Tablet (≤ 768px) ── */
 @media (max-width: 768px) {
   nav {
     padding: 0 1.25rem;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-size: 1.15rem;
+    font-weight: 800;
   }
 
   .nav-center {
@@ -924,8 +941,14 @@ nav {
   .nav-burger {
     display: flex;
     z-index: 10001;
-    padding: 8px; /* bigger tap area */
-    margin: -8px; /* compensate */
+    padding: 10px;
+    margin: -10px;
+  }
+
+  /* Hero */
+  #hero {
+    margin-top: 64px;
+    min-height: calc(100svh - 64px);
   }
 
   /* About */
@@ -936,7 +959,7 @@ nav {
 
   .about-image {
     max-width: 320px;
-    aspect-ratio: 16/9; /* more compact, not square */
+    aspect-ratio: 16/9;
     margin: 0 auto;
   }
 
@@ -995,27 +1018,28 @@ nav {
 /* ── Mobile (≤ 480px) ── */
 @media (max-width: 480px) {
   nav {
-    height: 60px;
+    height: 56px;
     padding: 0 1rem;
   }
 
   .nav-logo {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .theme-switcher {
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .theme-dot {
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
+    border-width: 1.5px;
   }
 
   /* Hero */
   #hero {
-    margin-top: 60px;
-    min-height: calc(100svh - 60px); /* svh = safe viewport height, no iOS chrome bar issues */
+    margin-top: 56px;
+    min-height: calc(100svh - 56px);
   }
 
   .hero-content {
