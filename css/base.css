@@ -317,3 +317,105 @@ a:hover {
     padding: 4rem 0;
   }
 }
+
+/* ============================================
+   TOUCH / MOBILE OPTIMIZATIONS
+   ============================================ */
+
+/* Restore cursor on touch devices — cursor: none only makes sense on desktop */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  /* Better tap targets — min 44px Apple HIG recommendation */
+  a,
+  button,
+  .btn,
+  .theme-dot,
+  .nav-link,
+  .project-link,
+  .social-link,
+  .carousel-arrow,
+  .carousel-dot,
+  .nav-burger {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover transforms on touch (no hover state anyway) */
+  .project-card:hover,
+  .service-box:hover,
+  .tech-tag:hover,
+  .project-link:hover,
+  .social-link:hover,
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-outline:hover {
+    transform: none;
+  }
+
+  /* Disable 3D tilt on touch */
+  .project-card {
+    transform: none !important;
+  }
+}
+
+/* Prevent blue tap highlight on all interactive elements */
+a,
+button,
+[role="button"],
+.btn,
+.theme-dot,
+.nav-link,
+.nav-burger,
+.carousel-arrow,
+.carousel-dot,
+.welcome-enter,
+.theme-card,
+.project-link,
+.social-link {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; /* eliminates 300ms tap delay */
+}
+
+/* Smooth scrolling with scroll-padding so fixed nav doesn't cover headings */
+html {
+  scroll-padding-top: 80px;
+}
+
+@media (max-width: 480px) {
+  html {
+    scroll-padding-top: 70px;
+  }
+}
+
+/* Safe area insets for notched phones (iPhone X+) */
+nav {
+  padding-left: max(2rem, env(safe-area-inset-left));
+  padding-right: max(2rem, env(safe-area-inset-right));
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

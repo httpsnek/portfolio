@@ -689,53 +689,141 @@
    RESPONSIVE
    ============================================ */
 
+/* ── Tablet (≤ 768px) ── */
 @media (max-width: 768px) {
+  .welcome-screen {
+    padding: 1.5rem 1rem;
+    justify-content: space-evenly;
+  }
+
+  .welcome-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-greeting {
+    font-size: 11px !important;
+    letter-spacing: 0.15em;
+  }
+
+  .welcome-name {
+    font-size: clamp(1.8rem, 9vw, 2.8rem) !important;
+  }
+
+  .welcome-title {
+    font-size: 15px !important;
+  }
+
+  .welcome-carousel-section {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
   .carousel-wrapper {
-    width: 320px;
+    width: min(320px, 80vw);
     height: 300px;
   }
 
   .theme-card {
-    width: 220px;
-    height: 260px;
+    width: clamp(170px, 52vw, 220px);
+    height: 265px;
   }
 
   .theme-card.prev {
-    transform: translate(-120%, -50%) rotateY(25deg) scale(0.75);
+    transform: translate(-115%, -50%) rotateY(25deg) scale(0.78);
   }
 
   .theme-card.next {
-    transform: translate(20%, -50%) rotateY(-25deg) scale(0.75);
-  }
-
-  .welcome-name {
-    font-size: clamp(2rem, 8vw, 3rem);
+    transform: translate(15%, -50%) rotateY(-25deg) scale(0.78);
   }
 
   .carousel-arrow {
     width: 40px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    flex-shrink: 0;
   }
 
-  .welcome-carousel-section {
-    gap: 1rem;
+  .welcome-hint {
+    font-size: 0.8rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .welcome-enter {
+    padding: 0.875rem 2.5rem;
+    font-size: 0.95rem;
   }
 }
 
+/* ── Mobile (≤ 480px) ── */
 @media (max-width: 480px) {
+  .welcome-screen {
+    padding: 1rem 0.75rem;
+  }
+
+  .welcome-header {
+    margin-bottom: 1rem;
+  }
+
+  .welcome-name {
+    font-size: clamp(1.5rem, 10vw, 2.2rem) !important;
+  }
+
+  .welcome-carousel-section {
+    gap: 0.5rem;
+  }
+
   .carousel-wrapper {
-    width: 260px;
+    width: min(280px, 90vw);
     height: 280px;
   }
 
   .theme-card {
-    width: 200px;
-    height: 240px;
+    width: clamp(160px, 58vw, 200px);
+    height: 245px;
   }
 
-  .theme-card.prev,
+  .theme-card.prev {
+    transform: translate(-110%, -50%) rotateY(20deg) scale(0.72);
+    opacity: 0.35;
+  }
+
   .theme-card.next {
-    opacity: 0.3;
+    transform: translate(10%, -50%) rotateY(-20deg) scale(0.72);
+    opacity: 0.35;
+  }
+
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .welcome-enter {
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ── Very small (≤ 360px) ── */
+@media (max-width: 360px) {
+  .welcome-name {
+    font-size: clamp(1.3rem, 10vw, 1.8rem) !important;
+  }
+
+  .carousel-wrapper {
+    width: 90vw;
+    height: 260px;
+  }
+
+  .theme-card {
+    width: 62vw;
+    height: 230px;
+  }
+
+  /* Hide side arrows on tiny screens, swipe-only */
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
   }
 }

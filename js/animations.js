@@ -127,10 +127,52 @@ function initNav() {
   // Burger menu
   const burger = document.getElementById('navBurger');
   const navCenter = document.querySelector('.nav-center');
+
+  function closeMenu() {
+    burger.classList.remove('active');
+    navCenter.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function openMenu() {
+    burger.classList.add('active');
+    navCenter.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent bg scroll
+  }
+
   if (burger && navCenter) {
     burger.addEventListener('click', () => {
-      burger.classList.toggle('active');
-      navCenter.classList.toggle('open');
+      if (burger.classList.contains('active')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close when nav link is tapped
+    navCenter.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    // Close on outside tap/click
+    document.addEventListener('click', (e) => {
+      if (navCenter.classList.contains('open') &&
+          !navCenter.contains(e.target) &&
+          !burger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) closeMenu();
+    }, { passive: true });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
     });
   }
 }
