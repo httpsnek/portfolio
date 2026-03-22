@@ -141,6 +141,10 @@ class ThemeCarousel {
   }
 
   enterPortfolio() {
+    // Prevent double-call (e.g. keyboard Enter + button click firing together)
+    if (this._entering) return;
+    this._entering = true;
+
     const selectedTheme = this.themes[this.currentIndex];
     document.documentElement.setAttribute('data-theme', selectedTheme);
     localStorage.setItem('portfolio-theme', selectedTheme);
@@ -152,10 +156,20 @@ class ThemeCarousel {
 
     const welcomeScreen = document.getElementById('welcomeScreen');
     welcomeScreen.classList.add('hidden');
+
+    // Scroll to top BEFORE restoring overflow so we always land on hero
+    // Temporarily disable smooth scroll so it jumps instantly
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
     document.body.style.overflow = '';
+    // Restore smooth scroll after a frame
+    requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = '';
+    });
 
     setTimeout(() => {
       welcomeScreen.style.display = 'none';
+      this._entering = false;
       if (typeof initScrollReveal === 'function') initScrollReveal();
     }, 700);
   }

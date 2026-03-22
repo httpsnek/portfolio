@@ -1,5 +1,7 @@
 /* ============================================
    CUSTOM CURSOR — Theme-aware
+   All positioning via left/top (never transform).
+   CSS handles visual effects (rotate, scale, animation).
    ============================================ */
 
 class CustomCursor {
@@ -11,15 +13,15 @@ class CustomCursor {
     this.ring = document.querySelector('.cursor-ring');
     this.trails = document.querySelectorAll('.cursor-trail');
 
-    this.mouse = { x: 0, y: 0 };
-    this.dotPos = { x: 0, y: 0 };
-    this.ringPos = { x: 0, y: 0 };
-    this.trailPositions = Array.from({ length: 6 }, () => ({ x: 0, y: 0 }));
+    this.mouse = { x: -100, y: -100 };
+    this.ringPos = { x: -100, y: -100 };
+    this.trailPositions = Array.from({ length: 6 }, () => ({ x: -100, y: -100 }));
 
     this.matrixChars = '01アイウエオカキクケコサシスセソ';
     this.lastMatrixTime = 0;
     this.isMoving = false;
     this.moveTimeout = null;
+    this.rafId = null;
 
     this.init();
   }
@@ -50,8 +52,20 @@ class CustomCursor {
     });
 
     // Hover interactive elements
+    this.bindHoverEvents();
+
+    // Re-bind on DOM changes (for dynamic elements)
+    const observer = new MutationObserver(() => this.bindHoverEvents());
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    this.animate();
+  }
+
+  bindHoverEvents() {
     const interactives = 'a, button, .btn, .theme-card, .carousel-arrow, input, textarea, .project-card';
     document.querySelectorAll(interactives).forEach(el => {
+      if (el.dataset.cursorBound) return;
+      el.dataset.cursorBound = 'true';
       el.addEventListener('mouseenter', () => {
         this.ring?.classList.add('hover');
         this.dot?.classList.add('hover');
@@ -61,26 +75,6 @@ class CustomCursor {
         this.dot?.classList.remove('hover');
       });
     });
-
-    // Re-bind on DOM changes (for dynamic elements)
-    const observer = new MutationObserver(() => {
-      document.querySelectorAll(interactives).forEach(el => {
-        if (!el.dataset.cursorBound) {
-          el.dataset.cursorBound = 'true';
-          el.addEventListener('mouseenter', () => {
-            this.ring?.classList.add('hover');
-            this.dot?.classList.add('hover');
-          });
-          el.addEventListener('mouseleave', () => {
-            this.ring?.classList.remove('hover');
-            this.dot?.classList.remove('hover');
-          });
-        }
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    this.animate();
   }
 
   spawnMatrixChar(x, y) {
@@ -99,32 +93,29 @@ class CustomCursor {
     char.style.opacity = '0.8';
     document.body.appendChild(char);
 
-    // Animate and remove
     requestAnimationFrame(() => {
       char.style.transition = 'opacity 400ms ease, transform 400ms ease';
       char.style.opacity = '0';
-      char.style.transform = `translate(-50%, -50%) translateY(${20 + Math.random() * 20}px)`;
+      char.style.transform = `translateY(${20 + Math.random() * 20}px)`;
     });
 
     setTimeout(() => char.remove(), 500);
   }
 
   animate() {
-    // Dot follows instantly
-    this.dotPos.x = this.mouse.x;
-    this.dotPos.y = this.mouse.y;
-
-    // Ring follows with lag
-    const lag = 0.15;
-    this.ringPos.x += (this.mouse.x - this.ringPos.x) * lag;
-    this.ringPos.y += (this.mouse.y - this.ringPos.y) * lag;
-
+    // Dot — instant position via left/top
     if (this.dot) {
-      this.dot.style.transform = `translate(${this.dotPos.x}px, ${this.dotPos.y}px) translate(-50%, -50%)`;
+      this.dot.style.left = this.mouse.x + 'px';
+      this.dot.style.top = this.mouse.y + 'px';
     }
 
+    // Ring — follows with lag, also via left/top
     if (this.ring) {
-      this.ring.style.transform = `translate(${this.ringPos.x}px, ${this.ringPos.y}px) translate(-50%, -50%)`;
+      const lag = 0.15;
+      this.ringPos.x += (this.mouse.x - this.ringPos.x) * lag;
+      this.ringPos.y += (this.mouse.y - this.ringPos.y) * lag;
+      this.ring.style.left = this.ringPos.x + 'px';
+      this.ring.style.top = this.ringPos.y + 'px';
     }
 
     // Trail for dark theme
@@ -139,14 +130,18 @@ class CustomCursor {
 
       this.trails.forEach((trail, i) => {
         const pos = this.trailPositions[i];
-        trail.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
+        trail.style.left = pos.x + 'px';
+        trail.style.top = pos.y + 'px';
         trail.style.opacity = this.isMoving ? (1 - i / this.trails.length) * 0.4 : 0;
-        trail.style.width = (6 - i * 0.8) + 'px';
-        trail.style.height = (6 - i * 0.8) + 'px';
+        const size = (6 - i * 0.8);
+        trail.style.width = size + 'px';
+        trail.style.height = size + 'px';
+        trail.style.marginLeft = -(size / 2) + 'px';
+        trail.style.marginTop = -(size / 2) + 'px';
       });
     }
 
-    requestAnimationFrame(() => this.animate());
+    this.rafId = requestAnimationFrame(() => this.animate());
   }
 }
 

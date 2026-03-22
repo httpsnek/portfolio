@@ -307,8 +307,8 @@ class TerminalPrint {
       if (i < text.length) {
         el.textContent += text[i];
         i++;
-        // Vary speed slightly for realism
-        const speed = 8 + Math.random() * 12;
+        // Fast terminal typing speed
+        const speed = 1 + Math.random() * 3;
         setTimeout(type, speed);
       } else {
         el.style.borderRight = 'none';

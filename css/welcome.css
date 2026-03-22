@@ -11,7 +11,24 @@
   align-items: center;
   justify-content: center;
   background: #0a0a0f;
-  transition: opacity 600ms ease, transform 600ms ease;
+  transition: background 500ms ease, opacity 600ms ease, transform 600ms ease;
+}
+
+/* Theme backgrounds */
+[data-theme="light"]    .welcome-screen { background: #e8f0fe; }
+[data-theme="dark"]     .welcome-screen { background: #0a0a0f; }
+[data-theme="terminal"] .welcome-screen { background: #000000; }
+[data-theme="retro"]    .welcome-screen { background: #f5e6d0; }
+
+/* Lock ALL welcome screen text to Inter — prevents terminal/retro font injection */
+.welcome-screen,
+.welcome-screen *,
+.welcome-greeting,
+.welcome-name,
+.welcome-title,
+.welcome-hint,
+.welcome-enter {
+  font-family: 'Inter', sans-serif !important;
 }
 
 .welcome-screen.hidden {
@@ -43,8 +60,7 @@
 }
 
 .welcome-greeting {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: 13px !important;
   font-weight: 400;
   color: #a1a1aa;
   letter-spacing: 0.2em;
@@ -55,8 +71,7 @@
 }
 
 .welcome-name {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: 52px !important;
   font-weight: 800;
   color: #f4f4f5;
   letter-spacing: -0.03em;
@@ -67,8 +82,7 @@
 }
 
 .welcome-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: 18px !important;
   font-weight: 300;
   color: #71717a;
   opacity: 0;
@@ -550,6 +564,84 @@
 .welcome-enter:active {
   transform: translateY(0);
 }
+
+/* ============================================
+   THEME-ADAPTIVE WELCOME TEXT COLORS
+   ============================================ */
+
+/* Light theme — dark text on light bg */
+[data-theme="light"] .welcome-greeting { color: #52525b; }
+[data-theme="light"] .welcome-name     { color: #18181b; }
+[data-theme="light"] .welcome-title    { color: #71717a; }
+[data-theme="light"] .welcome-hint     { color: #71717a; }
+[data-theme="light"] .welcome-enter {
+  color: #18181b;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .welcome-enter:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Terminal theme — green text */
+[data-theme="terminal"] .welcome-greeting { color: #00cc6a; }
+[data-theme="terminal"] .welcome-name     { color: #00ff87; }
+[data-theme="terminal"] .welcome-title    { color: #009950; }
+[data-theme="terminal"] .welcome-hint     { color: #009950; }
+[data-theme="terminal"] .welcome-enter {
+  color: #00ff87;
+  border-color: rgba(0, 255, 135, 0.3);
+}
+[data-theme="terminal"] .welcome-enter:hover {
+  background: rgba(0, 255, 135, 0.05);
+  border-color: rgba(0, 255, 135, 0.6);
+}
+
+/* Retro theme — dark text on warm bg */
+[data-theme="retro"] .welcome-greeting { color: #555555; }
+[data-theme="retro"] .welcome-name     { color: #2c2c2c; }
+[data-theme="retro"] .welcome-title    { color: #888888; }
+[data-theme="retro"] .welcome-hint     { color: #888888; }
+[data-theme="retro"] .welcome-enter {
+  color: #2c2c2c;
+  border-color: rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  border-width: 2px;
+}
+[data-theme="retro"] .welcome-enter:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Also theme-adaptive bg for carousel arrows and dots */
+[data-theme="light"] .carousel-arrow {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #52525b;
+}
+[data-theme="light"] .carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #18181b;
+}
+[data-theme="light"] .carousel-dot        { background: rgba(0, 0, 0, 0.15); }
+[data-theme="light"] .carousel-dot.active { background: #18181b; }
+
+[data-theme="retro"] .carousel-arrow {
+  background: #c0c0c0;
+  border: 2px solid #2c2c2c;
+  border-radius: 0;
+  color: #2c2c2c;
+}
+[data-theme="retro"] .carousel-dot        { background: rgba(0, 0, 0, 0.2); }
+[data-theme="retro"] .carousel-dot.active { background: #2c2c2c; }
+
+[data-theme="terminal"] .carousel-arrow {
+  background: rgba(0, 255, 135, 0.05);
+  border-color: rgba(0, 255, 135, 0.2);
+  color: #00ff87;
+}
+[data-theme="terminal"] .carousel-dot        { background: rgba(0, 255, 135, 0.15); }
+[data-theme="terminal"] .carousel-dot.active { background: #00ff87; }
 
 /* Animations */
 @keyframes welcome-fade-in {

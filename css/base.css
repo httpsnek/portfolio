@@ -96,14 +96,14 @@ a:hover {
   color: var(--accent-hover);
 }
 
-/* Retro theme — smaller font sizes */
-[data-theme="retro"] h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-[data-theme="retro"] h2 { font-size: clamp(1.2rem, 3vw, 2rem); }
-[data-theme="retro"] h3 { font-size: clamp(1rem, 2vw, 1.5rem); }
-[data-theme="retro"] p { font-size: clamp(0.7rem, 1vw, 0.85rem); line-height: 2; }
+/* Retro theme — smaller font sizes (exclude welcome screen) */
+[data-theme="retro"] h1:not(.welcome-screen h1) { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+[data-theme="retro"] h2:not(.welcome-screen h2) { font-size: clamp(1.2rem, 3vw, 2rem); }
+[data-theme="retro"] h3:not(.welcome-screen h3) { font-size: clamp(1rem, 2vw, 1.5rem); }
+[data-theme="retro"] p:not(.welcome-screen p)   { font-size: clamp(0.7rem, 1vw, 0.85rem); line-height: 2; }
 
-/* Terminal theme — all monospace */
-[data-theme="terminal"] * {
+/* Terminal theme — all monospace (exclude welcome screen) */
+[data-theme="terminal"] *:not(.welcome-screen):not(.welcome-screen *) {
   font-family: 'JetBrains Mono', monospace !important;
 }
 

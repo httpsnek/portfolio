@@ -1,5 +1,7 @@
 /* ============================================
    CUSTOM CURSOR — 4 unique styles per theme
+   Positioning: left/top only (JS sets these).
+   transform is FREE for CSS effects (rotate, scale, animation).
    ============================================ */
 
 /* Hide default cursor on desktop */
@@ -18,8 +20,7 @@
   pointer-events: none;
   z-index: 99999;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  will-change: transform;
+  will-change: left, top;
 }
 
 /* Hide on mobile */
@@ -30,67 +31,89 @@
   }
 }
 
-/* ☀️ LIGHT — Ink Drop cursor */
+/* ───────────────────────────────────────────
+   ☀️ LIGHT — Pen / Stylus cursor (angled)
+   ─────────────────────────────────────────── */
 [data-theme="light"] .cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: #18181b;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  transition: transform 200ms ease, width 200ms ease, height 200ms ease;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border-radius: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='28' viewBox='0 0 22 28'%3E%3Crect x='8' y='0' width='7' height='18' rx='3' fill='%2318181b'/%3E%3Crect x='8' y='15' width='7' height='3' fill='%23a1a1aa'/%3E%3Cpolygon points='8,18 15,18 11.5,26' fill='%2318181b'/%3E%3Cpolygon points='10,19 13,19 11.5,24' fill='%232563eb'/%3E%3Crect x='10' y='2' width='2' height='10' rx='1' fill='rgba(255,255,255,0.25)'/%3E%3Ccircle cx='11.5' cy='26.5' r='1.2' fill='%232563eb' opacity='0.7'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* Rotate pen to natural writing angle; offset so nib tip = cursor position */
+  transform-origin: 11px 27px;
+  transform: rotate(150deg);
+  /* Offset: move so the nib tip (11px, 27px in SVG) sits at left/top */
+  margin-left: -11px;
+  margin-top: -27px;
+  transition: filter 200ms ease;
 }
 
 [data-theme="light"] .cursor-dot.hover {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.6));
+}
+
+[data-theme="light"] .cursor-dot.click {
+  transform: rotate(-30deg) scale(0.92);
 }
 
 [data-theme="light"] .cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(37, 99, 235, 0.25);
-  opacity: 0.6;
-  transition: width 300ms ease, height 300ms ease, opacity 300ms ease, border-color 300ms ease;
+  display: none;
 }
 
-[data-theme="light"] .cursor-ring.hover {
-  width: 50px;
-  height: 50px;
-  border-color: rgba(37, 99, 235, 0.5);
-  opacity: 0.3;
-}
-
-[data-theme="light"] .cursor-ring.click {
-  width: 24px;
-  height: 24px;
-  opacity: 0.9;
-  border-color: var(--accent);
-}
-
-/* 🌙 DARK — Glowing dot + comet trail */
+/* ───────────────────────────────────────────
+   🌙 DARK — Rotating sparkle star
+   ─────────────────────────────────────────── */
 [data-theme="dark"] .cursor-dot {
-  width: 10px;
-  height: 10px;
-  background: #e9d5ff;
-  box-shadow: 0 0 10px var(--accent-glow),
-              0 0 20px var(--accent-glow),
-              0 0 40px rgba(124, 58, 237, 0.2);
+  width: 22px;
+  height: 22px;
+  background: none;
+  border-radius: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cdefs%3E%3CradialGradient id='sg' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='35%25' stop-color='%23f9a8d4'/%3E%3Cstop offset='65%25' stop-color='%23e9d5ff'/%3E%3Cstop offset='100%25' stop-color='%237c3aed' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpolygon points='11,0 12.8,8.2 22,11 12.8,13.8 11,22 9.2,13.8 0,11 9.2,8.2' fill='url(%23sg)'/%3E%3Ccircle cx='11' cy='11' r='2' fill='white' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* Center the star on cursor position */
+  margin-left: -11px;
+  margin-top: -11px;
+  /* Animations — transform is free since we position via left/top */
+  animation: starSpinPulse 4s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(233, 213, 255, 0.8)) drop-shadow(0 0 12px rgba(124, 58, 237, 0.5));
+  box-shadow: none;
+}
+
+[data-theme="dark"] .cursor-dot.hover {
+  animation: starSpinPulse 2s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(249, 168, 212, 0.9)) drop-shadow(0 0 20px rgba(124, 58, 237, 0.7));
+}
+
+/* Combined spin + pulse in one animation (avoids transform conflicts) */
+@keyframes starSpinPulse {
+  0%   { transform: rotate(0deg) scale(0.9); }
+  25%  { transform: rotate(90deg) scale(1.15); }
+  50%  { transform: rotate(180deg) scale(0.9); }
+  75%  { transform: rotate(270deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(0.9); }
 }
 
 [data-theme="dark"] .cursor-ring {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  background: rgba(124, 58, 237, 0.05);
-  transition: width 300ms ease, height 300ms ease, background 300ms ease;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(233, 213, 255, 0.15);
+  background: transparent;
+  margin-left: -20px;
+  margin-top: -20px;
+  transition: width 300ms ease, height 300ms ease, border-color 300ms ease, margin 300ms ease;
 }
 
 [data-theme="dark"] .cursor-ring.hover {
-  width: 64px;
-  height: 64px;
-  background: rgba(124, 58, 237, 0.1);
-  box-shadow: 0 0 30px var(--accent-glow);
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-color: rgba(249, 168, 212, 0.35);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
 }
 
 /* Comet trail dots */
@@ -103,8 +126,7 @@
   pointer-events: none;
   z-index: 99998;
   opacity: 0;
-  transform: translate(-50%, -50%);
-  will-change: transform, opacity;
+  will-change: left, top, opacity;
 }
 
 [data-theme="dark"] .cursor-trail {
@@ -117,12 +139,16 @@
   display: none;
 }
 
-/* ⬛ TERMINAL — Blinking block cursor */
+/* ───────────────────────────────────────────
+   ⬛ TERMINAL — Blinking block cursor
+   ─────────────────────────────────────────── */
 [data-theme="terminal"] .cursor-dot {
   width: 12px;
   height: 20px;
   background: var(--cursor-dot);
   border-radius: 0;
+  margin-left: -1px;
+  margin-top: -1px;
   animation: terminal-blink 1s step-end infinite;
 }
 
@@ -144,8 +170,7 @@
   font-size: 14px;
   color: var(--accent);
   opacity: 0;
-  transform: translate(-50%, -50%);
-  will-change: transform, opacity;
+  will-change: opacity;
 }
 
 [data-theme="terminal"] .cursor-matrix-char {
@@ -158,17 +183,18 @@
   display: none;
 }
 
-/* 🟠 RETRO — Pixel pointer */
+/* ───────────────────────────────────────────
+   🟠 RETRO — Pixel pointer
+   ─────────────────────────────────────────── */
 [data-theme="retro"] .cursor-dot {
   width: 24px;
   height: 24px;
   background: none;
   border-radius: 0;
-  /* CSS pixel art pointer */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M2 2h2v2H2V2zm2 2h2v2H4V4zm2 2h2v2H6V6zm2 2h2v2H8V8zm2 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2V8zm2 2h2v2h-2v-2zm-4 4h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2z' fill='%23ff3b00'/%3E%3Cpath d='M4 2h2v2H4V2zm2 2h2v2H6V4zm2 2h2v2H8V6zm2 2h2v2h-2V8zm2 2h2v2h-2v-2z' fill='%232c2c2c'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
-  transform: translate(0, 0);
+  /* Pixel pointer tip is at top-left, no offset needed */
 }
 
 [data-theme="retro"] .cursor-ring {
