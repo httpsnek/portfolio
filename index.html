@@ -157,6 +157,29 @@
   </nav>
 
   <!-- ============================================
+       MOBILE DRAWER (separate from nav-center)
+       ============================================ -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="drawer-panel" id="drawerPanel">
+    <div class="drawer-header">Menu</div>
+    <ul class="drawer-links">
+      <li><a href="#about" class="drawer-link">About</a></li>
+      <li><a href="#projects" class="drawer-link">Projects</a></li>
+      <li><a href="#services" class="drawer-link">Services</a></li>
+      <li><a href="#contact" class="drawer-link">Contact</a></li>
+    </ul>
+    <div class="drawer-themes">
+      <span class="drawer-themes-label">Theme</span>
+      <div class="drawer-theme-dots">
+        <button class="drawer-dot" data-theme="light" title="Light"></button>
+        <button class="drawer-dot" data-theme="dark" title="Dark"></button>
+        <button class="drawer-dot" data-theme="terminal" title="Terminal"></button>
+        <button class="drawer-dot" data-theme="retro" title="Retro"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
        HERO SECTION
        ============================================ -->
   <section id="hero">
@@ -183,6 +206,7 @@
   <section id="about" class="section">
     <div class="container">
       <h2 class="section-title reveal">About Me</h2>
+      <p class="section-subtitle reveal reveal-delay-1">Developer, engineer, problem-solver</p>
 
       <div class="about-content reveal reveal-delay-1">
         <div class="about-image">
@@ -197,98 +221,100 @@
           <p class="reveal reveal-delay-2">
             My expertise spans full-stack development, from crafting responsive interfaces to designing robust backends. I'm particularly interested in AI integration, process automation, and creating solutions that make a real impact.
           </p>
+        </div>
+      </div>
 
-          <div class="reveal reveal-delay-3">
-            <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary);">Tech Stack</p>
-            <div class="tech-stack">
-              <span class="tech-tag">HTML</span>
-              <span class="tech-tag">CSS</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">PHP</span>
-              <span class="tech-tag">Java</span>
-              <span class="tech-tag">AI/ML</span>
-            </div>
+      <!-- Counters — separate row -->
+      <div class="counters reveal reveal-delay-3">
+        <div class="counter">
+          <div class="counter-number" data-target="10" data-suffix="+">0</div>
+          <div class="counter-label">Projects</div>
+        </div>
+        <div class="counter">
+          <div class="counter-number" data-target="2" data-suffix="+">0</div>
+          <div class="counter-label">Years Experience</div>
+        </div>
+        <div class="counter">
+          <div class="counter-number" data-target="5" data-suffix="+">0</div>
+          <div class="counter-label">Clients</div>
+        </div>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="about-tech reveal reveal-delay-3">
+        <h3 class="about-subsection-title">Tech Stack</h3>
+        <div class="tech-stack">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">AI/ML</span>
+        </div>
+      </div>
+
+      <!-- Skill Bars -->
+      <div class="skills-section reveal reveal-delay-4">
+        <h3 class="about-subsection-title">Core Skills</h3>
+
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">JS / TS (Frontend)</span>
+            <span class="skill-percent">0%</span>
           </div>
-
-          <!-- Skill Bars -->
-          <div class="skills-section reveal reveal-delay-4">
-            <p>Core Skills</p>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">JS / TS (Frontend)</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="90"></div>
-              </div>
-            </div>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">Python</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="85"></div>
-              </div>
-            </div>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">AI / ML Integration</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="80"></div>
-              </div>
-            </div>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">PHP / Backend</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="75"></div>
-              </div>
-            </div>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">Git</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="73"></div>
-              </div>
-            </div>
-
-            <div class="skill-bar">
-              <div class="skill-info">
-                <span class="skill-name">Java</span>
-                <span class="skill-percent">0%</span>
-              </div>
-              <div class="skill-track">
-                <div class="skill-fill" data-level="50"></div>
-              </div>
-            </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="90"></div>
           </div>
+        </div>
 
-          <div class="counters reveal reveal-delay-4">
-            <div class="counter">
-              <div class="counter-number" data-target="10" data-suffix="+">0</div>
-              <div class="counter-label">Projects</div>
-            </div>
-            <div class="counter">
-              <div class="counter-number" data-target="2" data-suffix="+">0</div>
-              <div class="counter-label">Years Experience</div>
-            </div>
-            <div class="counter">
-              <div class="counter-number" data-target="5" data-suffix="+">0</div>
-              <div class="counter-label">Clients</div>
-            </div>
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">Python</span>
+            <span class="skill-percent">0%</span>
+          </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="85"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">AI / ML Integration</span>
+            <span class="skill-percent">0%</span>
+          </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="80"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">PHP / Backend</span>
+            <span class="skill-percent">0%</span>
+          </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="75"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">Git</span>
+            <span class="skill-percent">0%</span>
+          </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="73"></div>
+          </div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info">
+            <span class="skill-name">Java</span>
+            <span class="skill-percent">0%</span>
+          </div>
+          <div class="skill-track">
+            <div class="skill-fill" data-level="50"></div>
           </div>
         </div>
       </div>

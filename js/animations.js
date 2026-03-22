@@ -124,73 +124,92 @@ function initNav() {
 
   // Smooth scroll handled by effects.js SmoothPageTransitions
 
-  // Burger menu — slide-in drawer from right
+  // ── Drawer menu (completely separate from desktop nav-center) ──
   const burger = document.getElementById('navBurger');
-  const navCenter = document.querySelector('.nav-center');
-  if (!burger || !navCenter) return;
+  const drawer = document.getElementById('drawerPanel');
+  const backdrop = document.getElementById('drawerBackdrop');
+  if (!burger || !drawer || !backdrop) return;
 
-  // Create backdrop
-  const backdrop = document.createElement('div');
-  backdrop.className = 'nav-backdrop';
-  document.body.appendChild(backdrop);
+  let drawerOpen = false;
 
-  let menuOpen = false;
-  let closing = false;
-
-  function closeMenu() {
-    if (!menuOpen || closing) return;
-    closing = true;
-
-    burger.classList.remove('active');
-    navCenter.classList.add('closing');
-    backdrop.style.opacity = '0';
-    backdrop.style.pointerEvents = 'none';
-
-    setTimeout(() => {
-      navCenter.classList.remove('open', 'closing');
-      closing = false;
-      menuOpen = false;
-    }, 280);
-  }
-
-  function openMenu() {
-    if (menuOpen) return;
-    menuOpen = true;
-
+  function openDrawer() {
+    if (drawerOpen) return;
+    drawerOpen = true;
     burger.classList.add('active');
-    navCenter.classList.add('open');
-    backdrop.style.opacity = '1';
-    backdrop.style.pointerEvents = 'auto';
+    drawer.classList.add('open');
+    backdrop.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+
+    // Sync active theme dot
+    syncDrawerDots();
   }
 
+  function closeDrawer() {
+    if (!drawerOpen) return;
+    drawerOpen = false;
+    burger.classList.remove('active');
+    drawer.classList.remove('open');
+    backdrop.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+
+  function syncDrawerDots() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    drawer.querySelectorAll('.drawer-dot').forEach(dot => {
+      dot.classList.toggle('active', dot.dataset.theme === current);
+    });
+  }
+
+  // Burger toggle
   burger.addEventListener('click', (e) => {
     e.stopPropagation();
-    menuOpen ? closeMenu() : openMenu();
+    drawerOpen ? closeDrawer() : openDrawer();
   });
 
   // Backdrop click → close
-  backdrop.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeDrawer);
 
-  // Nav links → close
-  navCenter.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
+  // Drawer links → close
+  drawer.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // Theme dots in drawer — switch theme AND close drawer
+  drawer.querySelectorAll('.drawer-dot').forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const theme = dot.dataset.theme;
+      if (!theme) return;
+
+      // Apply theme
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('portfolio-theme', theme);
+
+      // Sync all dots — drawer + nav desktop
+      syncDrawerDots();
+      document.querySelectorAll('.theme-dot').forEach(d => {
+        d.classList.toggle('active', d.dataset.theme === theme);
+      });
+
+      closeDrawer();
+    });
   });
 
   // Resize to desktop → close instantly
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && menuOpen) {
-      navCenter.classList.remove('open', 'closing');
+    if (window.innerWidth > 768 && drawerOpen) {
+      drawerOpen = false;
       burger.classList.remove('active');
-      backdrop.style.opacity = '0';
-      backdrop.style.pointerEvents = 'none';
-      menuOpen = false;
-      closing = false;
+      drawer.classList.remove('open');
+      backdrop.classList.remove('visible');
+      document.body.style.overflow = '';
     }
   }, { passive: true });
 
   // Escape → close
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape') closeDrawer();
   });
 }
 

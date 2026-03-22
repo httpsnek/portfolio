@@ -263,7 +263,7 @@ a:hover {
     transparent 3px
   );
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99;
 }
 
 /* Terminal glow text */
@@ -372,6 +372,8 @@ button,
 [role="button"],
 .btn,
 .theme-dot,
+.drawer-dot,
+.drawer-link,
 .nav-link,
 .nav-burger,
 .carousel-arrow,

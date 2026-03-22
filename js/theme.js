@@ -23,8 +23,13 @@ class ThemeSwitcher {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('portfolio-theme', theme);
 
-    // Update active dot in nav
+    // Update active dot in nav (desktop)
     document.querySelectorAll('.theme-dot').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+
+    // Sync drawer dots (mobile)
+    document.querySelectorAll('.drawer-dot').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.theme === theme);
     });
   }

@@ -149,8 +149,11 @@ class ThemeCarousel {
     document.documentElement.setAttribute('data-theme', selectedTheme);
     localStorage.setItem('portfolio-theme', selectedTheme);
 
-    // Update nav theme dots
+    // Update nav theme dots (desktop + drawer)
     document.querySelectorAll('.theme-dot').forEach(dot => {
+      dot.classList.toggle('active', dot.dataset.theme === selectedTheme);
+    });
+    document.querySelectorAll('.drawer-dot').forEach(dot => {
       dot.classList.toggle('active', dot.dataset.theme === selectedTheme);
     });
 

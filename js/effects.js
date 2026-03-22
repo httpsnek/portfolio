@@ -62,11 +62,14 @@ class SmoothPageTransitions {
 
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // Close mobile menu
-        const navCenter = document.querySelector('.nav-center');
+        // Close mobile drawer if open
+        const drawerPanel = document.getElementById('drawerPanel');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
         const burger = document.getElementById('navBurger');
-        if (navCenter) navCenter.classList.remove('open');
+        if (drawerPanel) drawerPanel.classList.remove('open');
+        if (drawerBackdrop) drawerBackdrop.classList.remove('visible');
         if (burger) burger.classList.remove('active');
+        document.body.style.overflow = '';
 
         // Remove animation class after done
         setTimeout(() => {
