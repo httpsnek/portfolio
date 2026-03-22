@@ -124,20 +124,32 @@ function initNav() {
 
   // Smooth scroll handled by effects.js SmoothPageTransitions
 
-  // Burger menu
+  // Burger menu — slide-in drawer from right
   const burger = document.getElementById('navBurger');
   const navCenter = document.querySelector('.nav-center');
 
+  // Backdrop element
+  const backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  document.body.appendChild(backdrop);
+
   function closeMenu() {
-    burger.classList.remove('active');
-    navCenter.classList.remove('open');
-    document.body.style.overflow = '';
+    if (!burger.classList.contains('active')) return;
+    // Play slide-out, then hide
+    navCenter.classList.add('closing');
+    backdrop.classList.remove('visible');
+    setTimeout(() => {
+      navCenter.classList.remove('open', 'closing');
+      burger.classList.remove('active');
+      document.body.style.overflow = '';
+    }, 260); // matches drawerSlideOut duration
   }
 
   function openMenu() {
     burger.classList.add('active');
     navCenter.classList.add('open');
-    document.body.style.overflow = 'hidden'; // prevent bg scroll
+    backdrop.classList.add('visible');
+    document.body.style.overflow = 'hidden';
   }
 
   if (burger && navCenter) {
@@ -151,26 +163,18 @@ function initNav() {
 
     // Close when nav link is tapped
     navCenter.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        closeMenu();
-      });
+      link.addEventListener('click', closeMenu);
     });
 
-    // Close on outside tap/click
-    document.addEventListener('click', (e) => {
-      if (navCenter.classList.contains('open') &&
-          !navCenter.contains(e.target) &&
-          !burger.contains(e.target)) {
-        closeMenu();
-      }
-    });
+    // Close on backdrop click
+    backdrop.addEventListener('click', closeMenu);
 
     // Close on resize to desktop
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) closeMenu();
     }, { passive: true });
 
-    // Close on Escape key
+    // Close on Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
     });
