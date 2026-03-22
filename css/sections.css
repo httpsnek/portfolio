@@ -873,22 +873,16 @@ nav {
    Mobile nav — slide-in drawer from right
    ────────────────────────────────────────── */
 
-/* Backdrop */
+/* Backdrop — semi-transparent overlay left of drawer */
 .nav-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 9998;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  z-index: 9997;
+  /* Dark tint — backdrop-filter removed because it was rendering opaque */
+  background: rgba(0, 0, 0, 0.48);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 300ms ease;
-}
-
-.nav-backdrop.visible {
-  opacity: 1;
-  pointer-events: all;
+  transition: opacity 280ms ease;
 }
 
 /* Drawer */

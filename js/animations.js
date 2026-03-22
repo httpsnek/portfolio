@@ -127,58 +127,71 @@ function initNav() {
   // Burger menu — slide-in drawer from right
   const burger = document.getElementById('navBurger');
   const navCenter = document.querySelector('.nav-center');
+  if (!burger || !navCenter) return;
 
-  // Backdrop element
+  // Create backdrop
   const backdrop = document.createElement('div');
   backdrop.className = 'nav-backdrop';
   document.body.appendChild(backdrop);
 
+  let menuOpen = false;
+  let closing = false;
+
   function closeMenu() {
-    if (!burger.classList.contains('active')) return;
-    // Play slide-out, then hide
+    if (!menuOpen || closing) return;
+    closing = true;
+
+    burger.classList.remove('active');
     navCenter.classList.add('closing');
-    backdrop.classList.remove('visible');
+    backdrop.style.opacity = '0';
+    backdrop.style.pointerEvents = 'none';
+
     setTimeout(() => {
       navCenter.classList.remove('open', 'closing');
-      burger.classList.remove('active');
-      document.body.style.overflow = '';
-    }, 260); // matches drawerSlideOut duration
+      closing = false;
+      menuOpen = false;
+    }, 280);
   }
 
   function openMenu() {
+    if (menuOpen) return;
+    menuOpen = true;
+
     burger.classList.add('active');
     navCenter.classList.add('open');
-    backdrop.classList.add('visible');
-    document.body.style.overflow = 'hidden';
+    backdrop.style.opacity = '1';
+    backdrop.style.pointerEvents = 'auto';
   }
 
-  if (burger && navCenter) {
-    burger.addEventListener('click', () => {
-      if (burger.classList.contains('active')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOpen ? closeMenu() : openMenu();
+  });
 
-    // Close when nav link is tapped
-    navCenter.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
+  // Backdrop click → close
+  backdrop.addEventListener('click', closeMenu);
 
-    // Close on backdrop click
-    backdrop.addEventListener('click', closeMenu);
+  // Nav links → close
+  navCenter.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
 
-    // Close on resize to desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) closeMenu();
-    }, { passive: true });
+  // Resize to desktop → close instantly
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && menuOpen) {
+      navCenter.classList.remove('open', 'closing');
+      burger.classList.remove('active');
+      backdrop.style.opacity = '0';
+      backdrop.style.pointerEvents = 'none';
+      menuOpen = false;
+      closing = false;
+    }
+  }, { passive: true });
 
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-  }
+  // Escape → close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
 }
 
 /* ============================================
