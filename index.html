@@ -329,65 +329,116 @@
       <h2 class="section-title reveal">My Projects</h2>
 
       <div class="projects-grid">
-        <!-- EstateShine Project -->
+        <!-- Estate Shine Cleaning -->
         <div class="project-card reveal reveal-delay-1" data-parallax="0.3">
           <div class="card-shine"></div>
-          <div class="project-image">🏠</div>
+          <div class="project-image">🧹</div>
           <div class="project-content">
-            <h3 class="project-title">EstateShine</h3>
+            <h3 class="project-title">Estate Shine Cleaning</h3>
             <p class="project-description">
-              A modern real estate platform connecting buyers and sellers with an intuitive interface and advanced search capabilities.
+              A marketing and booking website for a premium home cleaning service in Sacramento, CA, built from scratch in vanilla HTML/CSS/JS. Features an interactive SVG floor-plan checklist that shows exactly what gets cleaned room by room, a draggable before/after comparison slider with real client photos, and live online booking through an embedded BookingKoala widget.
             </p>
             <div class="project-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">Python</span>
-              <span class="project-tag">PostgreSQL</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link">View</a>
-              <a href="#" class="project-link github">GitHub</a>
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">SVG</span>
+              <span class="project-tag">BookingKoala</span>
             </div>
           </div>
         </div>
 
-        <!-- Tripal Project -->
+        <!-- Fashion Cutout Bot -->
         <div class="project-card reveal reveal-delay-2" data-parallax="0.3">
           <div class="card-shine"></div>
-          <div class="project-image">✈️</div>
+          <div class="project-image">✂️</div>
           <div class="project-content">
-            <h3 class="project-title">Tripal</h3>
+            <h3 class="project-title">Fashion Cutout Bot</h3>
             <p class="project-description">
-              A comprehensive travel planning platform that helps users organize itineraries, find deals, and share travel experiences.
+              A Telegram bot that turns any product photo — a marketplace listing, a photo on a model, a phone snapshot — into a clean transparent PNG of just the garment. A two-stage pipeline (generative extraction + local matting) understands <em>what</em> to cut out, not just how to remove a background, and auto-skips the paid AI step whenever a photo is already studio-clean to keep costs down.
             </p>
             <div class="project-tags">
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">PHP</span>
-              <span class="project-tag">MySQL</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link">View</a>
-              <a href="#" class="project-link github">GitHub</a>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">aiogram</span>
+              <span class="project-tag">Playwright</span>
+              <span class="project-tag">Gemini API</span>
+              <span class="project-tag">OpenCV</span>
             </div>
           </div>
         </div>
 
-        <!-- AI Automation Project -->
+        <!-- Shop Automation -->
         <div class="project-card reveal reveal-delay-3" data-parallax="0.3">
           <div class="card-shine"></div>
-          <div class="project-image">🤖</div>
+          <div class="project-image">👟</div>
           <div class="project-content">
-            <h3 class="project-title">AI Automation</h3>
+            <h3 class="project-title">Shop Automation</h3>
             <p class="project-description">
-              Intelligent automation systems leveraging AI to streamline workflows, from data processing to intelligent chatbots.
+              A Telegram bot that automates product listing for a live shoe & streetwear store on Tilda — from donor photos to a published catalog card. Involved reverse-engineering the undocumented CommerceML sync protocol from scratch and building an idempotent CSV pipeline for the data it can't carry, cutting per-listing work from ~10 manual fields to a couple of Telegram messages.
             </p>
             <div class="project-tags">
               <span class="project-tag">Python</span>
-              <span class="project-tag">OpenAI</span>
-              <span class="project-tag">Telegram API</span>
+              <span class="project-tag">aiogram</span>
+              <span class="project-tag">Playwright</span>
+              <span class="project-tag">CommerceML / XML</span>
+              <span class="project-tag">Cloudflare R2</span>
             </div>
-            <div class="project-links">
-              <a href="#" class="project-link">View</a>
-              <a href="#" class="project-link github">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Maps Hunter -->
+        <div class="project-card reveal reveal-delay-4" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">🗺️</div>
+          <div class="project-content">
+            <h3 class="project-title">Maps Hunter</h3>
+            <p class="project-description">
+              An end-to-end outreach platform that finds local businesses with broken or missing websites via Google Maps, generates a personalized demo redesign for each one, and sends cold outreach with real proof instead of a bare promise — over WhatsApp and CAN-SPAM-compliant email, with a dashboard for manual review before anything goes out.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Playwright</span>
+              <span class="project-tag">Flask</span>
+              <span class="project-tag">Cloudflare Pages</span>
+              <span class="project-tag">SQLite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opora Set -->
+        <div class="project-card reveal reveal-delay-1" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">🛠️</div>
+          <div class="project-content">
+            <h3 class="project-title">Opora Set</h3>
+            <p class="project-description">
+              A full B2B/B2C e-commerce platform for a welding & abrasive tools retailer, built from scratch — storefront, admin panel, wholesale approval flow, payments and delivery integration. Includes a bulk supplier-catalog importer that handles messy real-world spreadsheets and forensically recovers product photos embedded as legacy binary objects in old .xls files.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span>
+              <span class="project-tag">TypeScript</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Prisma</span>
+              <span class="project-tag">LiqPay</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GTA RP Server -->
+        <div class="project-card reveal reveal-delay-2" data-parallax="0.3">
+          <div class="card-shine"></div>
+          <div class="project-image">🎮</div>
+          <div class="project-content">
+            <h3 class="project-title">GTA RP Server</h3>
+            <p class="project-description">
+              A commercial GTA Online-style roleplay server for FiveM, built from scratch — infrastructure, deployment, in-game economy, criminal subsystems, and a fair, non-pay-to-win monetization model designed for realistic growth from 0 to 100+ concurrent players. Resources are strictly separated by origin (vendored framework code is never touched directly, custom logic lives in its own layer), and the entire database schema is version-controlled as sequential SQL migrations for a fully reproducible environment.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Lua</span>
+              <span class="project-tag">FiveM / Qbox</span>
+              <span class="project-tag">MariaDB</span>
+              <span class="project-tag">systemd</span>
+              <span class="project-tag">Linux / Hetzner</span>
             </div>
           </div>
         </div>
